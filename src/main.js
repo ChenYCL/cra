@@ -137,12 +137,7 @@ export async function createProject(options) {
         name: 'ChenYCL',
     };
 
-    const fullPathName = new URL(import.meta.url).pathname;
-    const templateDir = path.resolve(
-        fullPathName.substr(fullPathName.indexOf('/')),
-        '../../templates',
-        options.template.toLowerCase()
-    );
+    const templateDir = path.join(__dirname,'..','templates', options.template.toLowerCase())
     options.templateDirectory = templateDir;
 
     try {
