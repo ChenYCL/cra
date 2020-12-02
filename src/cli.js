@@ -5,19 +5,19 @@ import chalk from "chalk";
 
 function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
-    {
-      '--git': Boolean,
-      '--yes': Boolean,
-      '--install': Boolean,
-      '--version':Boolean,
-      '-g': '--git',
-      '-y': '--yes',
-      '-i': '--install',
-      '-v':'--version',
-    },
-    {
-      argv: rawArgs.slice(2),
-    }
+      {
+        '--git': Boolean,
+        '--yes': Boolean,
+        '--install': Boolean,
+        '--version':Boolean,
+        '-g': '--git',
+        '-y': '--yes',
+        '-i': '--install',
+        '-v':'--version',
+      },
+      {
+        argv: rawArgs.slice(2),
+      }
   );
   return {
     skipPrompts: args['--yes'] || false,
@@ -31,8 +31,8 @@ function parseArgumentsIntoOptions(rawArgs) {
 async function promptForMissingOptions(options) {
   const defaultTemplate = 'app';
   if(options.version){
-     console.log('% cli version:', chalk.green.bold(require('../package.json').version));
-     process.exit()
+    console.log('% cli version:', chalk.green.bold(require('../package.json').version));
+    process.exit()
   }
   if (options.skipPrompts) {
     return {
@@ -56,7 +56,7 @@ async function promptForMissingOptions(options) {
     questions.push({
       type: 'input',
       name: 'port',
-      message: '请输入开发环境端口<9505>',
+      message: '请输入开发环境端口<9505>:',
       validate:(value)=>{
         if(isNaN(value)){
           return '必须是数字'
@@ -71,7 +71,7 @@ async function promptForMissingOptions(options) {
     questions.push({
       type: 'input',
       name: 'base',
-      message: '请输入子模块注册base名',
+      message: '请输入子模块注册base名:',
     });
   }
 
@@ -79,7 +79,7 @@ async function promptForMissingOptions(options) {
     questions.push({
       type: 'confirm',
       name: 'git',
-      message: '初始化git',
+      message: '初始化git?',
       default: false,
     });
   }

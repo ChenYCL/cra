@@ -143,7 +143,7 @@ export async function createProject(options) {
     try {
         await access(templateDir, fs.constants.R_OK);
     } catch (err) {
-        console.error('%s 无效模版名', chalk.red.bold('ERROR'));
+        console.error(chalk.red.bold('ERROR:'),err);
         process.exit(1);
     }
 
