@@ -20,24 +20,24 @@ async function copyTemplateFiles(options) {
     });
 }
 
-async function createGitignore(options) {
-    const file = fs.createWriteStream(
-        path.join(options.targetDirectory, '.gitignore'),
-        {flags: 'a'}
-    );
-    return writeGitignore({
-        type: 'Node',
-        file: file,
-    });
-}
+// async function createGitignore(options) {
+//     const file = fs.createWriteStream(
+//         path.join(options.targetDirectory, '.gitignore'),
+//         {flags: 'a'}
+//     );
+//     return writeGitignore({
+//         type: 'Node',
+//         file: file,
+//     });
+// }
 
-async function createLicense(options) {
-    const targetPath = path.join(options.targetDirectory, 'LICENSE');
-    const licenseContent = license.licenseText
-        .replace('<year>', new Date().getFullYear())
-        .replace('<copyright holders>', `${options.name} (${options.email})`);
-    return writeFile(targetPath, licenseContent, 'utf8');
-}
+// async function createLicense(options) {
+//     const targetPath = path.join(options.targetDirectory, 'LICENSE');
+//     const licenseContent = license.licenseText
+//         .replace('<year>', new Date().getFullYear())
+//         .replace('<copyright holders>', `${options.name} (${options.email})`);
+//     return writeFile(targetPath, licenseContent, 'utf8');
+// }
 
 async function initGit(options) {
     const result = await execa('git', ['init'], {
@@ -157,14 +157,14 @@ export async function createProject(options) {
                 title: 'Modify config',
                 task: () => modifyConfig(options)
             },
-            {
-                title: 'Create gitignore',
-                task: () => createGitignore(options),
-            },
-            {
-                title: 'Create License',
-                task: () => createLicense(options),
-            },
+            // {
+            //     title: 'Create gitignore',
+            //     task: () => createGitignore(options),
+            // },
+            // {
+            //     title: 'Create License',
+            //     task: () => createLicense(options),
+            // },
             {
                 title: 'Initialize git',
                 task: () => initGit(options),
